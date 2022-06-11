@@ -35,46 +35,6 @@ class MainActivity : AppCompatActivity() {
         if (newWord != "") {
             inputWordList.add(newWord)
         }
-//        areTv.text = inputWordList.size.toString()
-
-//        val fileContent: String = applicationContext.assets.open("input.txt").bufferedReader().use {
-//            it.readText()
-//        }
-//
-//        var fileWordList = ArrayList<String>()
-//        newWord = ""
-//        for (i in 0..fileContent.length - 1) {
-//            val letter: Char = fileContent.get(i)
-//            if (letter == ' ' || letter == '\n') {
-//                fileWordList.add(newWord)
-//                newWord = ""
-//            } else {
-//                newWord += letter
-//            }
-//        }
-//        fileWordList.add(newWord)
-
-//        var areWordList = ""
-//        var areNotWordList = ""
-//        for (inputW in inputWordList) {
-//            var isInFile = false
-//            for (fileW in fileWordList) {
-//                if (inputW == fileW) {
-//                    isInFile = true
-//                    break
-//                }
-//            }
-//            if (isInFile == false) {
-//                areNotWordList += inputW + " "
-//            } else {
-//                areWordList += inputW + " "
-//            }
-//        }
-//        areTv.text = areWordList
-//        areNotTv.text = areNotWordList
-
-
-
 
         val fileEngContent: String = applicationContext.assets.open("eng.txt").bufferedReader().use {
             it.readText()
@@ -91,33 +51,102 @@ class MainActivity : AppCompatActivity() {
             }
         }
         alEngWords.add(newWord)
-//        areTv.text = alEngWords.size.toString()
 
 
         var pronuncation = ""
         for (inputWord in inputWordList) {
             for (line in alEngWords) {
-//                pronuncation += line
                 if (line.startsWith(inputWord + ":")) {
                     pronuncation += getPronuncation(line)
+                    break
                 }
-//                break
             }
             pronuncation += " "
         }
         areTv.text = pronuncation
-
-
-//        val engCount = alEngWords.size
-//        var eng = ""
-//        for (i in 0..engCount - 1) {
-//             eng += alEngWords[i]
-//        }
-//        areTv.text = eng
     }
 
     private fun getPronuncation(engLine: String): String {
-        var pronuncation = engLine
+        var pronuncation = "" //engLine
+
+        val fileEngContent: String = applicationContext.assets.open("lv.txt").bufferedReader().use {
+            it.readText()
+        }
+        val allSounds = ArrayList<String>()
+        var newSoundL = ""
+        for (i in 0..fileEngContent.length - 1) {
+            val letter: Char = fileEngContent.get(i)
+            if (letter == '\n') {
+                allSounds.add(newSoundL)
+                newSoundL = ""
+            } else if (letter != ' ' && letter != '"') {
+                newSoundL += letter
+            }
+        }
+        allSounds.add(newSoundL)
+//        pronuncation = allSounds.size.toString()
+
+        val allSoundsList = ArrayList<LatvianSound>()
+        for (i in allSounds) {
+            var sound = ""
+            var index = 0
+            while (i[index] != ':') {
+                sound += i[index]
+                index += 1
+            }
+            var pr = ""
+            index += 2
+            while (i[index] != ',') {
+                pr += i[index]
+                index += 1
+            }
+            index += 1
+            var prC = ""
+            while (i[index] != ']') {
+                prC += i[index]
+                index += 1
+            }
+            val newSound = LatvianSound(sound, pr, prC)
+            allSoundsList.add(newSound)
+        }
+
+//        for (sou in allSoundsList) {
+//            pronuncation += sou.sound + " : "
+//        }
+//        pronuncation = allSoundsList.size.toString()
+        var j = 0
+        while (engLine[j] != '[') {
+            j += 1
+        }
+        j += 3
+        var s = ""
+        var count = 0
+        while (j < engLine.length - 1) {
+
+//            s += engLine[j]
+//            j += 1
+            while (engLine[j] != Char(39)) {
+                s += engLine[j]
+                j += 1
+            }
+            for (oneS in allSoundsList) {
+                if (oneS.sound == s) {
+                    count += 1
+                    pronuncation += oneS.pronuncation
+//                    break
+                }
+            }
+            if (engLine[j + 1] == ']') {
+                break
+            }
+            s = ""
+            j += 3
+        }
+
+
+        areNotTv.text = count.toString()
+
+
 
         return pronuncation
     }
