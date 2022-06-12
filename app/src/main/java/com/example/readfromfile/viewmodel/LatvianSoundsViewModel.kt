@@ -14,13 +14,6 @@ class LatvianSoundsViewModel(
         var newWord = ""
         for (i in 0..input.length - 1) {
             var letter: Char = input.get(i)
-//            if (letter.isLetter() == false) {
-//                var j = i
-//                while (letter.isLetter() == false && j < input.length - 1 || (letter == ' ' || letter == '\n')) {
-//                    j += 1
-//                    letter = input.get(j)
-//                }
-//            }
             if (letter <= 'Z' && letter >= 'A') {
                 val letterNumber = letter.toInt()
                 letter = Char(letterNumber + 32)
@@ -28,7 +21,7 @@ class LatvianSoundsViewModel(
             if (letter == ' ' || letter == '\n') {
                 inputWordList.add(newWord)
                 newWord = ""
-            } else {
+            } else if (letter <= 'z' && letter >= 'a') {
                 newWord += letter
             }
         }
