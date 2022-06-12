@@ -8,9 +8,14 @@
 
     <TextView
         android:id="@+id/first_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Type words, that you want to find and click on the button!"
+        android:gravity="center"
+        android:layout_margin="16dp"
+        android:textColor="@color/black"
+        android:lineSpacingExtra="8dp"
+        android:textSize="16sp"
+        android:text="Ieraksti teikumu, kam vēlies uzzināt izrunu, un spied pogu [Uzzināt izrunu]!"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,6 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
+        android:lineSpacingExtra="16dp"
+        android:layout_margin="16dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/first_tv" />
@@ -26,7 +35,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/find_btn"
-        android:text="Find"
+        android:text="Uzzināt izrunu"
+        android:layout_margin="16dp"
+        android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/edit_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -35,7 +46,10 @@
         android:id="@+id/second_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Words, that are in file: "
+        android:layout_margin="16dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:text="Ievadītā teikuma izruna: "
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/find_btn"/>
 
@@ -43,22 +57,11 @@
         android:id="@+id/are_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="16sp"
+        android:lineSpacingExtra="8dp"
+        android:textColor="@color/black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/second_tv"/>
-
-    <TextView
-        android:id="@+id/third_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Words, that aren't in file: "
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/are_tv" />
-
-    <TextView
-        android:id="@+id/are_not_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/third_tv"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

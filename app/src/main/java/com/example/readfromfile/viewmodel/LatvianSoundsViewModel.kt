@@ -1,16 +1,30 @@
 package com.example.readfromfile.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.example.readfromfile.model.LatvianSound
 import com.example.readfromfile.model.LatvianSoundsRepository
 
-class LatvianSoundsViewModel(private val fileLContent: String, private val fileEContent: String, private val input: String): ViewModel() {
+class LatvianSoundsViewModel(
+    private val fileLContent: String,
+    private val fileEContent: String,
+    private val input: String
+) : ViewModel() {
     // Function that get pronuncation for all words, and returns it as sentence
     public fun getPronuncation(): String {
         var inputWordList = ArrayList<String>()
         var newWord = ""
         for (i in 0..input.length - 1) {
-            val letter: Char = input.get(i)
+            var letter: Char = input.get(i)
+//            if (letter.isLetter() == false) {
+//                var j = i
+//                while (letter.isLetter() == false && j < input.length - 1 || (letter == ' ' || letter == '\n')) {
+//                    j += 1
+//                    letter = input.get(j)
+//                }
+//            }
+            if (letter <= 'Z' && letter >= 'A') {
+                val letterNumber = letter.toInt()
+                letter = Char(letterNumber + 32)
+            }
             if (letter == ' ' || letter == '\n') {
                 inputWordList.add(newWord)
                 newWord = ""

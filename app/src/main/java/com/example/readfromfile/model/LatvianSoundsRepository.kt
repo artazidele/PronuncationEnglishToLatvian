@@ -1,7 +1,6 @@
 package com.example.readfromfile.model
 
 class LatvianSoundsRepository(private val fileContent: String) {
-
     // Function that splits sounds as text, and returns split sounds as text
     private fun splitSounds(): ArrayList<String> {
         val allSounds = ArrayList<String>()

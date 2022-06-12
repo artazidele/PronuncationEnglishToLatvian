@@ -10,19 +10,18 @@ import com.example.readfromfile.viewmodel.LatvianSoundsViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var areTv: TextView
-    private lateinit var areNotTv: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setTitle("Pronunciation English to Latvian")
         areTv = findViewById(R.id.are_tv)
-        areNotTv = findViewById(R.id.are_not_tv)
         findViewById<Button>(R.id.find_btn).setOnClickListener {
             val inputText = findViewById<EditText>(R.id.edit_text).text.toString()
             readFiles(inputText)
         }
     }
 
-    // Function that read both files and call function to find pronuncation
+    // Function that read both files and update text field with word pronuncation, calling function
     private fun readFiles(input: String) {
         val fileEngContent: String = applicationContext.assets.open("eng.txt").bufferedReader().use {
             it.readText()
