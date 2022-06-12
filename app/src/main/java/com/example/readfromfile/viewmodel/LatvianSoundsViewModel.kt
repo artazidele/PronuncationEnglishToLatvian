@@ -9,7 +9,7 @@ class LatvianSoundsViewModel(
     private val input: String
 ) : ViewModel() {
     // Function that get pronuncation for all words, and returns it as sentence
-    public fun getPronuncation(): String {
+    public fun getPronuncation(): ArrayList<String> {
         var inputWordList = ArrayList<String>()
         var newWord = ""
         for (i in 0..input.length - 1) {
@@ -39,18 +39,31 @@ class LatvianSoundsViewModel(
                 newWord += letter
             }
         }
+        val wordsThatDoNotExist = ArrayList<String>()
         alEngWords.add(newWord)
         var pronuncation = ""
         for (inputWord in inputWordList) {
+            var wordexists = 0
             for (line in alEngWords) {
                 if (line.startsWith(inputWord + ":")) {
+                    wordexists = 1
                     pronuncation += makePronuncation(line)
                     break
                 }
             }
+            if (wordexists == 0) {
+                wordsThatDoNotExist.add(inputWord)
+            }
             pronuncation += " "
         }
-        return pronuncation
+        var notExist = ""
+        for (i in wordsThatDoNotExist) {
+            notExist += i + " "
+        }
+        val pronunciationAndNotExist = ArrayList<String>()
+        pronunciationAndNotExist.add(pronuncation)
+        pronunciationAndNotExist.add(notExist)
+        return pronunciationAndNotExist
     }
 
     // Function that makes pronuncation for one word

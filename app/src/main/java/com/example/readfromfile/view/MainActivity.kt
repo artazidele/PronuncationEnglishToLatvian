@@ -10,11 +10,13 @@ import com.example.readfromfile.viewmodel.LatvianSoundsViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var areTv: TextView
+    private lateinit var areNotTv: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setTitle("Pronunciation English to Latvian")
         areTv = findViewById(R.id.are_tv)
+        areNotTv = findViewById(R.id.are_not_tv)
         findViewById<Button>(R.id.find_btn).setOnClickListener {
             val inputText = findViewById<EditText>(R.id.edit_text).text.toString()
             readFiles(inputText)
@@ -29,6 +31,10 @@ class MainActivity : AppCompatActivity() {
         val fileLatvianContent: String = applicationContext.assets.open("lv.txt").bufferedReader().use {
             it.readText()
         }
-        areTv.text = LatvianSoundsViewModel(fileLatvianContent, fileEngContent, input).getPronuncation()
+        areTv.text = LatvianSoundsViewModel(fileLatvianContent, fileEngContent, input).getPronuncation().get(0)
+        val notExist = LatvianSoundsViewModel(fileLatvianContent, fileEngContent, input).getPronuncation().get(1)
+        if (notExist != "") {
+            areNotTv.text = "Izrunu vārdiem - " + notExist + "- neizdevās atrast."
+        }
     }
 }

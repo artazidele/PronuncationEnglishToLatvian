@@ -64,4 +64,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/second_tv"/>
 
+    <TextView
+        android:id="@+id/are_not_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="16sp"
+        android:lineSpacingExtra="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/are_tv"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
