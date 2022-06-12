@@ -1,4 +1,4 @@
-package com.example.readfromfile
+package com.example.readfromfile.model
 
 data class LatvianSound(
     val sound: String = "",
