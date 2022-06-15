@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
         areTv.text = LatvianSoundsViewModel(fileLatvianContent, fileEngContent, input).getPronuncation().get(0)
         val notExist = LatvianSoundsViewModel(fileLatvianContent, fileEngContent, input).getPronuncation().get(1)
         if (notExist != "") {
+            areNotTv.visibility = View.VISIBLE
             areNotTv.text = "Izrunu vārdiem - " + notExist + "- neizdevās atrast."
         } else {
             areNotTv.visibility = View.GONE
